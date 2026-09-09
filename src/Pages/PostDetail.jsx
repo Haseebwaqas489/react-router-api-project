@@ -23,7 +23,7 @@ function PostDetail() {
 
   if (loading) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
+      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ffffff" }}>
         Loading post...
       </h2>
     );
@@ -31,13 +31,7 @@ function PostDetail() {
 
   if (error) {
     return (
-      <h2
-        style={{
-          textAlign: "center",
-          marginTop: "40px",
-          color: "red",
-        }}
-      >
+      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ef4444" }}>
         {error}
       </h2>
     );
@@ -45,7 +39,7 @@ function PostDetail() {
 
   if (!post) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
+      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ffffff" }}>
         Post not found
       </h2>
     );
@@ -54,20 +48,27 @@ function PostDetail() {
   return (
     <div
       style={{
-        maxWidth: "700px",
-        margin: "40px auto",
-        padding: "30px",
+        maxWidth: "650px",
+        margin: "20px auto 40px",
+        padding: "35px 25px",
         backgroundColor: "#f8fafc",
         border: "2px solid #2563eb",
-        borderRadius: "12px",
-        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
+        borderRadius: "16px",
+        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.3)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center"
       }}
     >
       <h1
         style={{
-          marginBottom: "20px",
-          color: "#111827",
+          color: "#0f172a",
           textTransform: "capitalize",
+          fontSize: "26px",
+          lineHeight: "1.4", 
+          margin: "0 0 15px 0",
+          height: "auto"   
         }}
       >
         {post.title}
@@ -75,27 +76,26 @@ function PostDetail() {
 
       <p
         style={{
-          color: "#4b5563",
-          lineHeight: "1.7",
-          fontSize: "17px",
+          color: "#475569",
+          lineHeight: "1.6",
+          fontSize: "16px",
+          margin: "0 0 25px 0"
         }}
       >
         {post.body}
       </p>
 
-   
       <NavLink
         to=".."
         relative="path"
         style={{
-          display: "inline-block",
-          marginTop: "25px",
-          padding: "10px 16px",
+          padding: "10px 20px",
           backgroundColor: "#2563eb",
           color: "white",
           textDecoration: "none",
-          borderRadius: "7px",
+          borderRadius: "8px",
           fontWeight: "bold",
+          fontSize: "15px"
         }}
       >
         Back to Posts
@@ -103,4 +103,5 @@ function PostDetail() {
     </div>
   );
 }
+
 export default PostDetail;

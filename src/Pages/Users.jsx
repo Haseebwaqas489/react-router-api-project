@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 import { getUsers } from "../api/users";
@@ -9,17 +8,18 @@ function Users() {
 
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search") || "";
-useEffect(() => {
-  getUsers()
-    .then((data) => {
-      setUsers(data);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.log(error);
-      setLoading(false);
-    });
-}, []);
+
+  useEffect(() => {
+    getUsers()
+      .then((data) => {
+        setUsers(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
@@ -38,10 +38,12 @@ useEffect(() => {
           padding: 20px;
         }
 
-        .users-container h1 {
+        /* Generic h1 ki bajaye specific class name */
+        .users-title {
           text-align: center;
           font-size: 36px;
           margin-bottom: 10px;
+          color: #111827;
         }
 
         .search-result {
@@ -58,28 +60,30 @@ useEffect(() => {
         }
 
         .user-card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
-}
+          background: white;
+          padding: 25px;
+          border-radius: 12px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: 0.3s;
+        }
 
-.user-card h2 {
-  margin-bottom: 10px;
-  font-size: 22px;
-  color: #111827;
-  font-weight: 700;
-}
-  .user-card:hover {
- transform: translateY(-5px);
- box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
- }
+        .user-card h2 {
+          margin-bottom: 10px;
+          font-size: 22px;
+          color: #111827;
+          font-weight: 700;
+        }
 
-.user-card p {
-  color: #666;
-  margin-bottom: 20px;
-}
+        .user-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Generic p ki bajaye specific card email class */
+        .user-card-email {
+          color: #666;
+          margin-bottom: 20px;
+        }
 
         .details-btn {
           display: inline-block;
@@ -116,14 +120,14 @@ useEffect(() => {
             grid-template-columns: 1fr;
           }
 
-          .users-container h1 {
+          .users-title {
             font-size: 28px;
           }
         }
       `}</style>
 
       <div className="users-container">
-        <h1>Users</h1>
+        <h1 className="users-title">Users</h1>
 
         {search && (
           <p className="search-result">
@@ -139,7 +143,7 @@ useEffect(() => {
               <div className="user-card" key={user.id}>
                 <h2>{user.name}</h2>
 
-                <p>{user.email}</p>
+                <p className="user-card-email">{user.email}</p>
 
                 <NavLink
                   to={`/users/${user.id}`}
@@ -157,4 +161,3 @@ useEffect(() => {
 }
 
 export default Users;
-
