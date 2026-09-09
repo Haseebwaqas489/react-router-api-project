@@ -1,18 +1,16 @@
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
+import { getUserById } from "../api/users";
+
 function UserDetails() {
   const { id } = useParams();
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("User not found");
-        }
-        return response.json();
-      })
+    getUserById(id)
       .then((data) => {
         setUser(data);
         setLoading(false);
@@ -43,7 +41,7 @@ function UserDetails() {
             boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
           }}
         >
-          <h2>Loading...</h2>
+          <h2 style={{ color: "#111827" }}>Loading...</h2>
         </div>
       </div>
     );
@@ -73,9 +71,25 @@ function UserDetails() {
             Invalid Details
           </h2>
 
-          <p style={{ color: "#6b7280" }}>
+          <p style={{ color: "#4b5563" }}>
             User with ID {id} does not exist.
           </p>
+
+          <NavLink
+            to="/users"
+            style={{
+              display: "inline-block",
+              marginTop: "20px",
+              padding: "10px 18px",
+              backgroundColor: "#2563eb",
+              color: "white",
+              textDecoration: "none",
+              borderRadius: "7px",
+              fontWeight: "bold",
+            }}
+          >
+            Back to Users
+          </NavLink>
         </div>
       </div>
     );
@@ -86,9 +100,6 @@ function UserDetails() {
       style={{
         minHeight: "100vh",
         backgroundColor: "#f4f7fb",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         padding: "40px 20px",
         boxSizing: "border-box",
       }}
@@ -97,6 +108,7 @@ function UserDetails() {
         style={{
           width: "100%",
           maxWidth: "700px",
+          margin: "0 auto",
           backgroundColor: "white",
           borderRadius: "16px",
           padding: "35px",
@@ -104,7 +116,7 @@ function UserDetails() {
           boxSizing: "border-box",
         }}
       >
-        
+        {/* User Header */}
         <div
           style={{
             display: "flex",
@@ -126,6 +138,7 @@ function UserDetails() {
               justifyContent: "center",
               fontSize: "28px",
               fontWeight: "bold",
+              flexShrink: 0,
             }}
           >
             {user.name.charAt(0)}
@@ -137,6 +150,7 @@ function UserDetails() {
                 margin: 0,
                 fontSize: "28px",
                 color: "#111827",
+                fontWeight: "700",
               }}
             >
               {user.name}
@@ -145,7 +159,8 @@ function UserDetails() {
             <p
               style={{
                 margin: "6px 0 0",
-                color: "#6b7280",
+                color: "#4b5563",
+                fontSize: "15px",
               }}
             >
               @{user.username}
@@ -153,10 +168,11 @@ function UserDetails() {
           </div>
         </div>
 
+        {/* User Details - Single Column */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: "1fr",
             gap: "15px",
             marginTop: "25px",
           }}
@@ -173,7 +189,13 @@ function UserDetails() {
               Email
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.email}
             </p>
           </div>
@@ -190,7 +212,13 @@ function UserDetails() {
               Phone
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.phone}
             </p>
           </div>
@@ -207,7 +235,13 @@ function UserDetails() {
               Website
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.website}
             </p>
           </div>
@@ -224,7 +258,13 @@ function UserDetails() {
               Company
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.company.name}
             </p>
           </div>
@@ -241,7 +281,13 @@ function UserDetails() {
               City
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.address.city}
             </p>
           </div>
@@ -258,15 +304,64 @@ function UserDetails() {
               Street
             </span>
 
-            <p style={{ color: "#111827", fontWeight: "500" }}>
+            <p
+              style={{
+                color: "#111827",
+                fontWeight: "600",
+                margin: "6px 0 0",
+              }}
+            >
               {user.address.street}
             </p>
           </div>
         </div>
+
+        {/* Buttons */}
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            marginTop: "30px",
+            flexWrap: "wrap",
+          }}
+        >
+          <NavLink
+            to={`/users/${id}/posts`}
+            style={({ isActive }) => ({
+              padding: "12px 20px",
+              backgroundColor: isActive ? "#1d4ed8" : "#2563eb",
+              color: "white",
+              textDecoration: "none",
+              borderRadius: "8px",
+              fontWeight: "bold",
+            })}
+          >
+            View Posts
+          </NavLink>
+
+          <NavLink
+            to="/users"
+            style={{
+              padding: "12px 20px",
+              backgroundColor: "#e5e7eb",
+              color: "#374151",
+              textDecoration: "none",
+              borderRadius: "8px",
+              fontWeight: "bold",
+            }}
+          >
+            Back to Users
+          </NavLink>
+        </div>
       </div>
+
+      <Outlet />
     </div>
   );
 }
 
 export default UserDetails;
+
+
+
 
