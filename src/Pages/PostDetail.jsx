@@ -57,7 +57,8 @@ function PostDetail() {
         maxWidth: "700px",
         margin: "40px auto",
         padding: "30px",
-        backgroundColor: "white",
+        backgroundColor: "#f8fafc",
+        border: "2px solid #2563eb",
         borderRadius: "12px",
         boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
       }}
@@ -74,7 +75,7 @@ function PostDetail() {
 
       <p
         style={{
-          color: "#555",
+          color: "#4b5563",
           lineHeight: "1.7",
           fontSize: "17px",
         }}
@@ -82,8 +83,10 @@ function PostDetail() {
         {post.body}
       </p>
 
+   
       <NavLink
-        to={`/users/${id}/posts`}
+        to=".."
+        relative="path"
         style={{
           display: "inline-block",
           marginTop: "25px",
@@ -100,5 +103,4 @@ function PostDetail() {
     </div>
   );
 }
-
 export default PostDetail;

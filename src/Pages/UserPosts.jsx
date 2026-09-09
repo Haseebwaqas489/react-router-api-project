@@ -24,12 +24,7 @@ function UserPosts() {
 
   if (loading) {
     return (
-      <div
-        style={{
-          textAlign: "center",
-          padding: "30px",
-        }}
-      >
+      <div style={{ textAlign: "center", padding: "30px" }}>
         <h2>Loading posts...</h2>
       </div>
     );
@@ -37,12 +32,7 @@ function UserPosts() {
 
   if (error) {
     return (
-      <div
-        style={{
-          textAlign: "center",
-          padding: "30px",
-        }}
-      >
+      <div style={{ textAlign: "center", padding: "30px" }}>
         <h2 style={{ color: "red" }}>{error}</h2>
       </div>
     );
@@ -80,26 +70,16 @@ function UserPosts() {
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           >
-            <h2
-              style={{
-                color: "#111827",
-                marginTop: 0,
-              }}
-            >
+            <h2 style={{ color: "#111827", marginTop: 0 }}>
               {post.title}
             </h2>
 
-            <p
-              style={{
-                color: "#4b5563",
-                lineHeight: "1.6",
-              }}
-            >
+            <p style={{ color: "#4b5563", lineHeight: "1.6" }}>
               {post.body}
             </p>
-
+            
             <NavLink
-              to={`/users/${id}/posts/${post.id}`}
+              to={`${post.id}`}
               style={{
                 display: "inline-block",
                 padding: "10px 15px",
@@ -116,7 +96,6 @@ function UserPosts() {
         ))
       )}
 
-      
       <Outlet />
     </div>
   );

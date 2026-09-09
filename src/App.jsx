@@ -19,21 +19,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/users" element={<Users />} />
-
-        <Route path="/users/:id" element={<UserDetails />}>
-          
-          <Route path="posts" element={<UserPosts />}>
-            
-            <Route
-              path=":postId"
-              element={<PostDetail />}
-            />
-            
-          </Route>
-
-        </Route>
+        <Route path="/users/:id" element={<UserDetails />} />
+        <Route path="/users/:id/posts" element={<UserPosts />} />
+        <Route path="/users/:id/posts/:postId" element={<PostDetail />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
