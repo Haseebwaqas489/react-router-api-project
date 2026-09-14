@@ -1,17 +1,20 @@
+
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { getPostById } from "../api/users";
-
 function PostDetail() {
   const { id, postId } = useParams();
-
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
   useEffect(() => {
     getPostById(postId)
       .then((data) => {
+        if (data.userId !== Number(id)) {
+          setError("This post does not belong to this user.");
+          setLoading(false);
+          return;
+        }
         setPost(data);
         setLoading(false);
       })
@@ -19,32 +22,47 @@ function PostDetail() {
         setError(error.message);
         setLoading(false);
       });
-  }, [postId]);
+  }, [postId, id]);
 
   if (loading) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ffffff" }}>
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+          color: "#ffffff",
+        }}
+      >
         Loading post...
       </h2>
     );
   }
-
   if (error) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ef4444" }}>
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+          color: "#ef4444",
+        }}
+      >
         {error}
       </h2>
     );
   }
-
   if (!post) {
     return (
-      <h2 style={{ textAlign: "center", marginTop: "40px", color: "#ffffff" }}>
+      <h2
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+          color: "#ffffff",
+        }}
+      >
         Post not found
       </h2>
     );
   }
-
   return (
     <div
       style={{
@@ -58,7 +76,7 @@ function PostDetail() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        textAlign: "center"
+        textAlign: "center",
       }}
     >
       <h1
@@ -66,9 +84,8 @@ function PostDetail() {
           color: "#0f172a",
           textTransform: "capitalize",
           fontSize: "26px",
-          lineHeight: "1.4", 
+          lineHeight: "1.4",
           margin: "0 0 15px 0",
-          height: "auto"   
         }}
       >
         {post.title}
@@ -79,7 +96,7 @@ function PostDetail() {
           color: "#475569",
           lineHeight: "1.6",
           fontSize: "16px",
-          margin: "0 0 25px 0"
+          margin: "0 0 25px 0",
         }}
       >
         {post.body}
@@ -95,7 +112,7 @@ function PostDetail() {
           textDecoration: "none",
           borderRadius: "8px",
           fontWeight: "bold",
-          fontSize: "15px"
+          fontSize: "15px",
         }}
       >
         Back to Posts
@@ -103,5 +120,5 @@ function PostDetail() {
     </div>
   );
 }
-
 export default PostDetail;
+

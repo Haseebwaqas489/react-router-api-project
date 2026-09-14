@@ -6,6 +6,7 @@ import UserDetails from "./Pages/UserDetail";
 import UserPosts from "./Pages/UserPosts";
 import PostDetail from "./Pages/PostDetail";
 import NotFound from "./Pages/NotFound";
+import UserInfo from "./Pages/UserInfo";
 
 import "./App.css";
 
@@ -18,14 +19,20 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
-        <Route path="/users/:id" element={<UserDetails />} />
-        <Route path="/users/:id/posts" element={<UserPosts />} />
-        <Route path="/users/:id/posts/:postId" element={<PostDetail />} />
+  <Route path="/" element={<Home />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+  <Route path="/users" element={<Users />} />
+
+  <Route path="/users/:id" element={<UserDetails />}>
+    <Route index element={<UserInfo />} />
+
+    <Route path="posts" element={<UserPosts />}>
+      <Route path=":postId" element={<PostDetail />} />
+    </Route>
+  </Route>
+
+  <Route path="*" element={<NotFound />} />
+</Routes>
     </>
   );
 }

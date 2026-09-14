@@ -6,7 +6,8 @@ function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [searchParams] = useSearchParams();
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search") || "";
 
   useEffect(() => {
@@ -20,6 +21,18 @@ function Users() {
         setLoading(false);
       });
   }, []);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+
+    if (value) {
+
+      setSearchParams({ search: value });
+    } else {
+   
+      setSearchParams({});
+    }
+  };
 
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
@@ -38,12 +51,32 @@ function Users() {
           padding: 20px;
         }
 
-        /* Generic h1 ki bajaye specific class name */
         .users-title {
           text-align: center;
           font-size: 36px;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
           color: #111827;
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .search-input {
+          width: 100%;
+          max-width: 400px;
+          padding: 12px 18px;
+          font-size: 16px;
+          border: 2px solid #e5e7eb;
+          border-radius: 8px;
+          outline: none;
+          transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+          border-color: #2563eb;
         }
 
         .search-result {
@@ -79,7 +112,6 @@ function Users() {
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Generic p ki bajaye specific card email class */
         .user-card-email {
           color: #666;
           margin-bottom: 20px;
@@ -129,6 +161,16 @@ function Users() {
       <div className="users-container">
         <h1 className="users-title">Users</h1>
 
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search users by name..."
+            value={search}
+            onChange={handleSearchChange}
+            className="search-input"
+          />
+        </div>
+
         {search && (
           <p className="search-result">
             Search results for: <strong>{search}</strong>
@@ -159,5 +201,4 @@ function Users() {
     </>
   );
 }
-
 export default Users;
