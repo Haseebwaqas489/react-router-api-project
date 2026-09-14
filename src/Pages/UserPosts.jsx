@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useMatch
+} from "react-router-dom";
+
 import { getUserPosts } from "../api/users";
 
 function UserPosts() {
@@ -8,6 +15,8 @@ function UserPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const postDetail = useMatch("/users/:id/posts/:postId");
 
   useEffect(() => {
     getUserPosts(id)
@@ -30,12 +39,17 @@ function UserPosts() {
     );
   }
 
+  // Error
   if (error) {
     return (
       <div style={{ textAlign: "center", padding: "30px" }}>
         <h2 style={{ color: "red" }}>{error}</h2>
       </div>
     );
+  }
+
+  if (postDetail) {
+    return <Outlet />;
   }
 
   return (
@@ -57,7 +71,9 @@ function UserPosts() {
       </h1>
 
       {posts.length === 0 ? (
-        <p style={{ textAlign: "center" }}>No posts found.</p>
+        <p style={{ textAlign: "center" }}>
+          No posts found.
+        </p>
       ) : (
         posts.map((post) => (
           <div
@@ -70,14 +86,24 @@ function UserPosts() {
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           >
-            <h2 style={{ color: "#111827", marginTop: 0 }}>
+            <h2
+              style={{
+                color: "#111827",
+                marginTop: 0,
+              }}
+            >
               {post.title}
             </h2>
 
-            <p style={{ color: "#4b5563", lineHeight: "1.6" }}>
+            <p
+              style={{
+                color: "#4b5563",
+                lineHeight: "1.6",
+              }}
+            >
               {post.body}
             </p>
-            
+
             <NavLink
               to={`${post.id}`}
               style={{
@@ -95,10 +121,7 @@ function UserPosts() {
           </div>
         ))
       )}
-
-      <Outlet />
     </div>
   );
 }
-
 export default UserPosts;

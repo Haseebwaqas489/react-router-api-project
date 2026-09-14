@@ -7,19 +7,32 @@ function PostDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   useEffect(() => {
+    setLoading(true);
+    setError("");
+    setPost(null);
+
     getPostById(postId)
       .then((data) => {
+       
+        if (!data || !data.id) {
+          setError("This post does not exist.");
+          setLoading(false);
+          return;
+        }
+
         if (data.userId !== Number(id)) {
           setError("This post does not belong to this user.");
           setLoading(false);
           return;
         }
+
         setPost(data);
         setLoading(false);
       })
-      .catch((error) => {
-        setError(error.message);
+      .catch(() => {
+        setError("This post does not exist.");
         setLoading(false);
       });
   }, [postId, id]);
@@ -37,32 +50,42 @@ function PostDetail() {
       </h2>
     );
   }
+
   if (error) {
     return (
-      <h2
+      <div
         style={{
           textAlign: "center",
-          marginTop: "40px",
-          color: "#ef4444",
+          marginTop: "60px",
         }}
       >
-        {error}
-      </h2>
+        <h2
+          style={{
+            color: "#ef4444",
+            marginBottom: "20px",
+          }}
+        >
+          {error}
+        </h2>
+
+        <NavLink
+          to={`/users/${id}/posts`}
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#2563eb",
+            color: "white",
+            textDecoration: "none",
+            borderRadius: "8px",
+            fontWeight: "bold",
+          }}
+        >
+          Back to Posts
+        </NavLink>
+      </div>
     );
   }
-  if (!post) {
-    return (
-      <h2
-        style={{
-          textAlign: "center",
-          marginTop: "40px",
-          color: "#ffffff",
-        }}
-      >
-        Post not found
-      </h2>
-    );
-  }
+
+
   return (
     <div
       style={{
