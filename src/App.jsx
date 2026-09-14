@@ -19,20 +19,26 @@ function App() {
       </nav>
 
       <Routes>
-  <Route path="/" element={<Home />} />
 
-  <Route path="/users" element={<Users />} />
+        <Route path="/" element={<Home />} />
 
-  <Route path="/users/:id" element={<UserDetails />}>
-    <Route index element={<UserInfo />} />
+        <Route path="/users" element={<Users />} />
 
-    <Route path="posts" element={<UserPosts />}>
-      <Route path=":postId" element={<PostDetail />} />
-    </Route>
-  </Route>
+        <Route path="/users/:id" element={<UserDetails />}>
 
-  <Route path="*" element={<NotFound />} />
-</Routes>
+          <Route index element={<UserInfo />} />
+
+          {/* All posts */}
+          <Route path="posts" element={<UserPosts />} />
+
+          {/* Single post */}
+          <Route path="posts/:postId" element={<PostDetail />} />
+
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
     </>
   );
 }
