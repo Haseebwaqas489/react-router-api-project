@@ -28,10 +28,9 @@ function App() {
 
           <Route index element={<UserInfo />} />
 
-          {/* All posts */}
           <Route path="posts" element={<UserPosts />} />
 
-          {/* Single post */}
+
           <Route path="posts/:postId" element={<PostDetail />} />
 
         </Route>

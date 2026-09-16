@@ -22,25 +22,11 @@ function UserInfo() {
 
   if (loading) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#f4f7fb",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "white",
-            padding: "40px 60px",
-            borderRadius: "16px",
-            textAlign: "center",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
-          }}
-        >
-          <h2 style={{ color: "#111827" }}>Loading...</h2>
+      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+        <div className="bg-white p-5 rounded-2xl text-center shadow-lg">
+          <h2 className="text-gray-900 text-xl font-semibold">
+            Loading...
+          </h2>
         </div>
       </div>
     );
@@ -48,49 +34,19 @@ function UserInfo() {
 
   if (!user) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#f4f7fb",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "white",
-            padding: "40px 60px",
-            borderRadius: "16px",
-            textAlign: "center",
-            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
-          }}
-        >
-          <h2
-            style={{
-              color: "#dc2626",
-              marginBottom: "10px",
-            }}
-          >
+      <div className="min-h-screen bg-white flex justify-center items-center">
+        <div className="bg-white p-5 rounded-2xl text-center shadow-lg">
+          <h2 className="text-red-600 mb-2">
             Invalid Details
           </h2>
 
-          <p style={{ color: "#4b5563" }}>
+          <p className="text-gray-600">
             User with ID {id} does not exist.
           </p>
 
           <NavLink
             to="/users"
-            style={{
-              display: "inline-block",
-              marginTop: "20px",
-              padding: "10px 18px",
-              backgroundColor: "#2563eb",
-              color: "white",
-              textDecoration: "none",
-              borderRadius: "7px",
-              fontWeight: "bold",
-            }}
+            className="inline-block mt-5 px-[18px] py-[10px] bg-blue-600 text-white no-underline rounded-[7px] font-bold"
           >
             Back to Users
           </NavLink>
@@ -100,255 +56,91 @@ function UserInfo() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#f4f7fb",
-        padding: "40px 20px",
-        boxSizing: "border-box",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "700px",
-          margin: "0 auto",
-          backgroundColor: "white",
-          borderRadius: "16px",
-          padding: "35px",
-          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
-          boxSizing: "border-box",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
-            paddingBottom: "25px",
-            borderBottom: "1px solid #e5e7eb",
-          }}
-        >
-          <div
-            style={{
-              width: "70px",
-              height: "70px",
-              borderRadius: "50%",
-              backgroundColor: "#2563eb",
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "28px",
-              fontWeight: "bold",
-              flexShrink: 0,
-            }}
-          >
+    <div className="min-h-screen bg-[#f4f7fb] px-5 py-10 box-border">
+
+      <div className="w-full max-w-[700px] mx-auto bg-white rounded-2xl p-[35px] shadow-[0_10px_30px_rgba(0,0,0,0.08)] box-border">
+        <div className="flex items-center gap-5 pb-[25px] border-b border-[#e5e7eb]">
+
+          <div className="w-[70px] h-[70px] rounded-full bg-blue-600 text-white flex items-center justify-center text-[28px] font-bold shrink-0">
             {user.name.charAt(0)}
           </div>
 
           <div>
-            <h1
-              style={{
-                margin: 0,
-                fontSize: "28px",
-                color: "#111827",
-                fontWeight: "700",
-              }}
-            >
+            <h1 className="m-0 text-[28px] text-gray-900 font-bold">
               {user.name}
             </h1>
 
-            <p
-              style={{
-                margin: "6px 0 0",
-                color: "#4b5563",
-                fontSize: "15px",
-              }}
-            >
+            <p className="mt-[6px] mb-0 text-gray-600 text-[15px]">
               @{user.username}
             </p>
           </div>
-        </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "15px",
-            marginTop: "25px",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+        </div>
+        <div className="grid grid-cols-1 gap-[15px] mt-[25px]">
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               Email
             </span>
 
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.email}
             </p>
           </div>
-
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               Phone
             </span>
 
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.phone}
             </p>
           </div>
-
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               Website
             </span>
-
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.website}
             </p>
           </div>
-
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               Company
             </span>
 
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.company.name}
             </p>
           </div>
-
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               City
             </span>
 
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.address.city}
             </p>
           </div>
-
-          <div
-            style={{
-              backgroundColor: "#f8fafc",
-              border: "1px solid #e5e7eb",
-              borderRadius: "10px",
-              padding: "15px",
-            }}
-          >
-            <span style={{ color: "#6b7280", fontSize: "13px" }}>
+          <div className="bg-slate-50 border border-[#e5e7eb] rounded-[10px] p-[15px]">
+            <span className="text-gray-500 text-[13px]">
               Street
             </span>
 
-            <p
-              style={{
-                color: "#111827",
-                fontWeight: "600",
-                margin: "6px 0 0",
-              }}
-            >
+            <p className="text-gray-900 font-semibold mt-[6px] mb-0">
               {user.address.street}
             </p>
           </div>
         </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "12px",
-            marginTop: "30px",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="flex gap-3 mt-[30px] flex-wrap">
           <NavLink
             to={`/users/${id}/posts`}
-            style={{
-              padding: "12px 20px",
-              backgroundColor: "#2563eb",
-              color: "white",
-              textDecoration: "none",
-              borderRadius: "8px",
-              fontWeight: "bold",
-            }}
+            className="px-5 py-3 bg-blue-600 text-white no-underline rounded-lg font-bold"
           >
             View Posts
           </NavLink>
-
           <NavLink
             to="/users"
-            style={{
-              padding: "12px 20px",
-              backgroundColor: "#e5e7eb",
-              color: "#374151",
-              textDecoration: "none",
-              borderRadius: "8px",
-              fontWeight: "bold",
-            }}
+            className="px-5 py-3 bg-gray-200 text-gray-700 no-underline rounded-lg font-bold"
           >
             Back to Users
           </NavLink>
